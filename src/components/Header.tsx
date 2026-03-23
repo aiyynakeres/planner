@@ -14,13 +14,15 @@ export function Header({ selectedDate, currentView, onAddItem }: HeaderProps) {
     <header className="px-6 pt-12 pb-4 bg-white/80 backdrop-blur-md sticky top-0 z-10 border-b border-[#E5E5EA]">
       <div className="flex justify-between items-end">
         <div>
-          <p className="text-[#8E8E93] text-sm font-semibold uppercase tracking-wider">
-            {format(selectedDate, 'EEEE, d MMMM')}
-          </p>
+          {currentView !== 'backlog' && (
+            <p className="text-[#8E8E93] text-sm font-semibold uppercase tracking-wider">
+              {format(selectedDate, 'EEEE, d MMMM')}
+            </p>
+          )}
           <h1 className="text-3xl font-bold tracking-tight">
             {currentView === 'today' ? 'Today' : 
              currentView === 'schedule' ? 'Schedule' : 
-             currentView === 'week' ? 'Weekly Planner' : 'Settings'}
+             currentView === 'week' ? 'Weekly Planner' : 'Backlog'}
           </h1>
         </div>
         <button 

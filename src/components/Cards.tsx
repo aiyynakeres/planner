@@ -9,7 +9,7 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function TaskCard({ item, onToggle, onDelete, onEdit }: { item: Item, onToggle: () => void, onDelete: () => void, onEdit: () => void }) {
+export function TaskCard({ item, onToggle, onDelete, onEdit }: { item: Item, onToggle: () => void, onDelete: () => void, onEdit: () => void, key?: string }) {
   return (
     <motion.div 
       layout
@@ -48,7 +48,7 @@ export function TaskCard({ item, onToggle, onDelete, onEdit }: { item: Item, onT
   );
 }
 
-export function EventCard({ item, onDelete, onEdit }: { item: Item, onDelete: () => void, onEdit: () => void }) {
+export function EventCard({ item, onDelete, onEdit }: { item: Item, onDelete: () => void, onEdit: () => void, key?: string }) {
   return (
     <motion.div 
       layout

@@ -17,6 +17,9 @@ interface ScheduleViewProps {
 }
 
 export function ScheduleView({ selectedDate, onDateChange, items }: ScheduleViewProps) {
+  const itemsWithTime = items.filter(item => item.time);
+  const itemsWithoutTime = items.filter(item => !item.time);
+
   return (
     <motion.div
       key="schedule"
@@ -30,11 +33,27 @@ export function ScheduleView({ selectedDate, onDateChange, items }: ScheduleView
          <span className="font-semibold">{format(selectedDate, 'MMMM d, yyyy')}</span>
          <button onClick={() => onDateChange(addDays(selectedDate, 1))} className="p-2 hover:bg-[#F2F2F7] rounded-full"><ChevronRight size={20}/></button>
       </div>
+
+      {itemsWithoutTime.length > 0 && (
+        <div className="space-y-2 mb-8">
+          <h3 className="text-xs font-bold text-[#8E8E93] uppercase tracking-wider px-1">All Day / No Time</h3>
+          <div className="grid grid-cols-1 gap-2">
+            {itemsWithoutTime.map(item => (
+              <div key={item.id} className={cn(
+                "p-3 rounded-xl shadow-sm border-l-4",
+                item.type === 'event' ? "bg-blue-50 border-blue-500" : "bg-purple-50 border-purple-500"
+              )}>
+                <p className="font-semibold text-sm">{item.title}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       
       <div className="relative border-l-2 border-[#E5E5EA] ml-4 pl-6 space-y-8 py-4">
         {Array.from({ length: 24 }).map((_, i) => {
           const hour = i;
-          const itemsAtHour = items.filter(item => item.time && parseInt(item.time.split(':')[0]) === hour);
+          const itemsAtHour = itemsWithTime.filter(item => item.time && parseInt(item.time.split(':')[0]) === hour);
           
           return (
             <div key={i} className="relative">
@@ -51,7 +70,9 @@ export function ScheduleView({ selectedDate, onDateChange, items }: ScheduleView
                         item.type === 'event' ? "bg-blue-50 border-blue-500" : "bg-purple-50 border-purple-500"
                       )}>
                         <p className="font-semibold text-sm">{item.title}</p>
-                        {item.time && <p className="text-[10px] text-[#8E8E93]">{item.time}</p>}
+                        <p className="text-[10px] text-[#8E8E93]">
+                          {item.time} {item.endTime ? `— ${item.endTime}` : ''}
+                        </p>
                       </div>
                     ))
                   ) : (

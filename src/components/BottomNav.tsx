@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListTodo, Clock, LayoutGrid, Settings } from 'lucide-react';
+import { ListTodo, Clock, LayoutGrid, Inbox } from 'lucide-react';
 import { ViewType } from '../types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -57,10 +57,10 @@ export function BottomNav({ currentView, onViewChange }: BottomNavProps) {
         label="Week" 
       />
       <NavButton 
-        active={currentView === 'settings'} 
-        onClick={() => onViewChange('settings')} 
-        icon={<Settings size={24} />} 
-        label="Settings" 
+        active={currentView === 'backlog'} 
+        onClick={() => onViewChange('backlog')} 
+        icon={<Inbox size={24} />} 
+        label="Backlog" 
       />
     </nav>
   );

@@ -5,12 +5,14 @@ export interface Item {
   title: string;
   description?: string;
   completed: boolean;
-  date: string; // ISO string (YYYY-MM-DD)
+  date?: string; // ISO string (YYYY-MM-DD), optional for backlog
   time?: string; // HH:mm (Start time)
   endTime?: string; // HH:mm (End time)
   duration?: number; // in minutes (for events)
   type: ItemType;
   category?: string;
+  isBacklog?: boolean;
+  order?: number;
 }
 
 export interface Habit {
@@ -19,4 +21,4 @@ export interface Habit {
   completedDates: string[]; // Array of ISO strings (YYYY-MM-DD)
 }
 
-export type ViewType = 'today' | 'schedule' | 'week' | 'settings';
+export type ViewType = 'today' | 'schedule' | 'week' | 'backlog';
