@@ -1,0 +1,5 @@
+{
+  "name": "iOS Task & Schedule Planner",
+  "description": "A minimalist, iOS-inspired task manager and scheduler for daily and weekly planning.",
+  "requestFramePermissions": ["notifications"]
+}
